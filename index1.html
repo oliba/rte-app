@@ -1,0 +1,767 @@
+<!doctype html>
+<html>
+<head>
+	<title>storyboard</title>
+	<meta charset="utf-8">
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery-ui/jquery-ui.min.js"></script>
+<script src="js/jquery.ui.touch-punch.min.js"></script>
+<link rel="stylesheet" href="js/jquery-ui/jquery-ui.min.css">
+<script src='js/spectrum.js'></script>
+<link rel='stylesheet' href='css/spectrum.css' />
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<!--<script src="js/md5.min.js"></script>-->
+
+   
+	<script>
+        $(document).ready(function(){
+
+/*            
+             $('#btn').on('click', function () {
+            var newEntry = 'wejrhwjer';
+            menuArray.push(newEntry);
+            console.log (menuArray)
+        })
+*/
+
+        var loginScreen = function(){
+            $('<div id="loginscreen">').appendTo('body');
+            $('<form id="loginform"><div><label for="loginname">your name</label><input type="text" id="loginname"></div><div><label for="loginpass">... and the pass plz</label><input type="password" id="loginpass"></div><p id="loginfail"></p></form>').appendTo('#loginscreen').fadeIn(1000);
+            
+        }
+        loginScreen();
+        var aUser = [
+            {name:'seppi', pass:'hallo'}, 
+            {name:'susi', pass:'nixgibts'}, 
+            {name:'oliba', pass:'sers'}]
+
+        $('#loginform').on('keyup', function(event){
+            $('#loginfail').html('');
+
+            if(event.keyCode === 13) {
+            var name = $('#loginname').val();
+            var pass = $('#loginpass').val();
+            
+
+            if(name == 'seppi' && pass == 'hallo'){
+                $('#loginscreen').fadeOut();
+            }
+            else {
+                $('#loginfail').html('user oder pass nicht vorhanden');
+            }
+
+            }
+        })
+
+         var menuItem = function (pic, display) 
+         {
+            var _this = this; 
+            var triggered = false;
+            _this.pic = pic;
+            _this.display = display || 'none';
+            _this.longpress = function()
+
+            { console.log('passt so', $(_this).parent())
+
+                $(_this).parent().on('click touchstart', function()
+                {
+                    console.log('noch a bissl länga')
+                    if(!triggered){
+                        triggered = true;
+                    setTimeout(function()
+                    {
+                        console.log('fost do')
+                        triggered = false;
+                        $(_this).css({'transform':'scale(1.5)'});
+                    }, 500)}
+                })
+            }
+            }
+
+/*                var flag = false;
+$thing.bind('touchstart click', function(){
+  if (!flag) {
+    flag = true;
+    setTimeout(function(){ flag = false; }, 100);
+    // do something
+  }
+
+  return false
+});
+            });
+
+            }
+         }
+*/
+<<<<<<< HEAD
+            var picArray = [
+                'resources/pictures/003-signs-1.svg',
+                'resources/pictures/001-file.svg',
+                'resources/pictures/002-upload.svg',
+                'resources/pictures/004-location.svg',
+                'resources/pictures/005-signs.svg',
+                'resources/pictures/left-alignment.svg',
+                'resources/pictures/color-text.svg']
+            var menuArray = [];
+
+            for (var j=0; j < picArray.length; j++) {
+                
+                var newEntry = new menuItem(picArray[j],'inline-block');
+                menuArray.push(newEntry);
+            }
+
+              
+            var createMenuItem = function(pic, display){
+                pic = newEntry.pic;
+                display = newEntry.display;
+                $('#blob')
+                .append($('<div>').sortable()
+                .css({backgroundImage:'url("' + newEntry.pic + '")', 'display': newEntry.display, 'height':'3em', 'width':'3em'}));
+            }
+
+        $('#btn').on('click', function () {
+            createMenuItem();
+
+=======
+            var picArray = ['001-file.svg','002-upload.svg','003-signs-1.svg','004-location.svg','005-signs.svg','left-alignment.svg']
+            var menuArray = [];
+
+            for (var j=0; j < picArray.length; j++) {
+                
+                var newEntry = new menuItem(picArray[j],'inline-block');
+                menuArray.push(newEntry);
+            }
+
+            console.log(menuArray);
+              
+            var createMenuItem = function(pic, display){
+                pic = newEntry.pic;
+                display = newEntry.display;
+                $('#blob')
+                .append($('<div>')
+                .css({backgroundImage:'url("' + newEntry.pic + '")', 'display': newEntry.display, 'height':'3em', 'width':'3em'}));
+            }
+
+        $('#btn').on('click', function () {
+            createMenuItem();
+
+>>>>>>> e3896f42de68e8fd4cd7a747d19ea8c51627df87
+ });
+
+       
+            
+// ------ menu animation ----
+    
+     //   var menuArray = ['Home','Preise','Kontakt','Über uns'];
+        var menulist = $('<ul>').appendTo('#menu');
+            var pressTimer, pressed;
+
+            var createMenu = function(){
+
+                for (let i = 0; i < menuArray.length; i++) {                        // wegen blockscoped von i für longpress effekt;
+<<<<<<< HEAD
+=======
+                menulist
+                .append($('<li>')
+                .css({backgroundImage:'url("' + menuArray[i].pic + '")', 'display': menuArray[i].display, 'height':'3em', 'width':'3em'})
+                .hide()
+                .fadeIn(500)
+                .attr('id', 'li'+i)
+                .on('touchend mouseup mouseleave touchcancel', function() {
+                    var _this = this;
+                    if (pressed=true){
+                          $(_this).css({'transform':'scale(1)'});
+                    clearTimeout(pressTimer);
+                    pressed=false;
+                    }
+                }).on('touchstart mousedown', function() 
+                    {   var _this = this;
+                        pressTimer = window.setTimeout(function()
+                        {   
+                            pressed = true;
+                            $(_this)
+                            .append($('<img class="pressed" src="'+menuArray[i].pic+'">')
+                            .css({ 'position':'relative', 'transform':'scale(1.2)', 'transform':'translate(20px,-15px)', 'width':'3em','height':'3em',}));
+                            $(_this).css({opacity:'0.2'});
+                        }, 400); 
+                        return false;
+                    })
+                );
+                }; 
+            }
+
+            createMenu();
+            
+
+                /*      var createMenu = function () 
+            {
+                if(i < menuArray.length) {
+>>>>>>> e3896f42de68e8fd4cd7a747d19ea8c51627df87
+                menulist
+                .append($('<li>')
+                .css({backgroundImage:'url("' + menuArray[i].pic + '")', backgroundSize:'cover', 'display': menuArray[i].display, 'height':'3em', 'width':'3em'})
+                .hide()
+                .fadeIn(500)
+<<<<<<< HEAD
+                .attr('id', 'li'+i)
+/*                .on('touchend mouseup mouseleave touchcancel', function() {
+                    var _this = this;
+                    if (pressed=true){
+                          $(this).css({'transform':'scale(1)'});
+                    clearTimeout(pressTimer);
+                    pressed=false;
+                    }
+                }).on('touchstart mousedown', function() 
+                    {  var _this = this;
+                        pressTimer = window.setTimeout(function()
+                        {   
+                            pressed = true;
+                            $(this)
+                            .append($('<img class="pressed" src="'+menuArray[i].pic+'">')
+                            .css({ 'position':'relative', 'transform':'scale(1.2)', 'transform':'translate(20px,-15px)', 'width':'3em','height':'3em',}));
+                            $(this).css({opacity:'0.2'});
+                        }, 400); 
+                        return false;
+                    })*/
+                );
+                }; 
+            }
+
+            createMenu();
+
+            $('#menu ul')
+            .sortable({appendTo: '#menu',
+            containment: 'parent',
+            cursor: "move",
+            delay: 250,
+            grid: [ 20, 20 ],
+     //     helper: "clone",
+     //      items: "> li",
+    //        placeholder: "sortable-placeholder",
+            revert: 'true',
+      /*    //  tolerance: "intersect",
+            forceHelperSize: true,
+             start: function(e, ui){
+            // loop through the items, except the one we're
+            // currently dragging, and hide it...
+            ui.helper.addClass("excluded");
+            $("#menu li:not(.excluded)")
+                .css("visibility", "hidden");
+
+            // get the clone that's under it and hide it...
+            ui.helper.data("clone").hide();
+        },
+
+        stop: function(e, ui){
+            // get the item we were just dragging, and
+            // its clone, and adjust accordingly...
+            $("#menu li.exclude-me").each(function(){
+                var item = $(this);
+                var clone = item.data("clone");
+                var position = item.position();
+
+                // move the clone under the item we've just dropped...
+                clone.css("left", position.left);
+                clone.css("top", position.top);
+                clone.show();
+
+                // remove unnecessary class...
+                item.removeClass("exclude-me");
+            });
+
+            // make sure all our original items are visible again...
+            $("#menu li").css("visibility", "visible");
+        },
+
+        // here's where the magic happens...
+        change: function(e, ui){
+            // get all invisible items that are also not placeholders
+            // and process them when ordering changes...
+            $("#menu li:not(.exclude-me, .ui-sortable-placeholder)").each(function(){
+                var item = $(this);
+                var clone = item.data("clone");
+
+                // stop current clone animations...
+                clone.stop(true, false);
+
+                // get the invisible item, which has snapped to a new
+                // location, get its position, and animate the visible
+                // clone to it...
+                var position = item.position();
+                clone.animate({
+                    left: position.left,
+                    top: position.top}, 500);
+            });
+        }*/
+    });
+
+ /*   // loop through the original items...
+    $("#menu li").each(function(){
+
+        // clone the original items to make their
+        // absolute-positioned counterparts...
+        var item = $(this);
+        var item_clone = item.clone();
+        // 'store' the clone for later use...
+        item.data("clone", item_clone);
+
+        // set the initial position of the clone
+        var position = item.position();
+        item_clone.css("left", position.left);
+        item_clone.css("top", position.top);
+
+        // append the clone...
+        $("#cloned_items").append(item_clone);
+    });
+            */
+=======
+                .attr('id', 'li'+i));
+               
+                i++;
+                }
+
+                else { return ;}
+            }*/
+>>>>>>> e3896f42de68e8fd4cd7a747d19ea8c51627df87
+
+
+
+/* ------------------------------story ----------------------*/
+  var oStory = {  }
+
+var getSel = function() {
+
+              
+            
+               var selTxt = document.getSelection();
+               
+
+               if (selTxt != undefined && selTxt.rangeCount != 0 && ((selTxt.anchorNode == selTxt.focusNode && (selTxt.anchorOffset - selTxt.focusOffset) != 0) || ( selTxt.anchorNode != selTxt.focusNode )))
+               {
+ 
+                   var selHtml = '';
+                   if(selTxt.anchorNode !== selTxt.focusNode)
+                   {
+                        if (selTxt.rangeCount) 
+                        {
+                            var container = $('<div>');
+                            for (var i = 0, len = selTxt.rangeCount; i < len; ++i) 
+                            {
+                            container.append(selTxt.getRangeAt(i).cloneContents());                 //gets the selected content and clones it
+                            }
+                            selHtml = container.html();                                             // in order to use the html() method on it
+                        }
+                    } 
+                  /*  else if (typeof document.selection != 'undefined') 
+                    {
+                        if (document.selection.type == 'Text') 
+                        {
+                        html = document.selection.createRange().htmlText;
+                        }
+                    }*/
+                     else if (selTxt.anchorNode === selTxt.focusNode)
+                {
+                var htmlTag = selTxt.anchorNode.parentElement.nodeName.toLowerCase();
+
+                        if (selTxt.rangeCount) 
+                        {
+                            var container = $('<div>');
+                            for (var i = 0, len = selTxt.rangeCount; i < len; ++i) 
+                            {
+                            container.append(selTxt.getRangeAt(i).cloneContents());
+                            }
+                            selHtml = container.html();
+                           selHtml = '<' + htmlTag + '>' + selHtml + '</' + htmlTag + '>';
+                        }
+                }           
+                    console.log(selHtml);
+                    return selHtml;
+                }
+               
+            };
+  
+        $('#storycontent').on('keyup mouseup', getSel);
+
+/*        var replaceText = function replaceSelectedText(replacementText) {
+            var sel, range;
+            if (window.getSelection) {
+                sel = window.getSelection();
+                if (sel.rangeCount) {
+                    range = sel.getRangeAt(0);
+                    range.deleteContents();
+                    range.insertNode(document.createTextNode(replacementText));
+                }
+            } else if (document.selection && document.selection.createRange) {
+                range = document.selection.createRange();
+                range.text = replacementText;
+            }
+        }*/
+
+function nextNode(node) {
+    if (node.hasChildNodes()) {
+        return node.firstChild;
+    } else {
+        while (node && !node.nextSibling) {
+            node = node.parentNode;
+        }
+        if (!node) {
+            return null;
+        }
+        return node.nextSibling;
+    }
+}
+
+function getRangeSelectedNodes(range) {
+    var node = range.startContainer;
+    var endNode = range.endContainer;
+
+    // Special case for a range that is contained within a single node
+    if (node == endNode) {
+        return [node];
+    }
+
+    // Iterate nodes until we hit the end container
+    var rangeNodes = [];
+    while (node && node != endNode) {
+        rangeNodes.push( node = nextNode(node) );
+    }
+
+    // Add partially selected nodes at the start of the range
+    node = range.startContainer;
+    while (node && node != range.commonAncestorContainer) {
+        rangeNodes.unshift(node);
+        node = node.parentNode;
+    }
+
+    return rangeNodes;
+}
+
+function getSelectedNodes() {
+    if (window.getSelection) {
+        var sel = window.getSelection();
+        if (!sel.isCollapsed) {
+            return getRangeSelectedNodes(sel.getRangeAt(0));
+        }
+    }
+    return [];
+}
+
+
+/*
+          
+            var range = selection.getRangeAt(0);
+            var allWithinRangeParent = range.getElementsByTagName('*');
+
+            var allSelected = [];
+            for (var i=0, el; el = allWithinRangeParent[i]; i++) {
+            // The second parameter says to include the element 
+            // even if it's not fully selected
+            if (selection.containsNode(el, true) ) {
+                allSelected.push(el);
+            }
+            }*/
+
+            var selection = document.getSelection();
+
+        $('#li0').on('click', function(){
+            var selection = document.getSelection();
+            var parentName = document.getSelection().anchorNode.parentElement.nodeName.toLowerCase();
+            var parentEle = document.getSelection().anchorNode.parentElement;
+            if (selection.anchorNode === selection.focusNode){
+            switch (parentName) {
+            case 'p':
+            case 'h1':
+            case 'h2':
+            case 'h3':
+            case 'h4':
+            case 'h5':
+            case 'h6':
+            case 'strong':
+            case 'em':
+            case 'b':
+            
+               { $(parentEle).toggleClass('right_align');
+                   break; }
+            
+            case 'li':
+            case 'code':
+            case 'blockquote':
+            case 'q': {
+                   $(parentEle).parent().toggleClass('right_align');
+                   break;
+               }
+          
+        }}
+        else {
+
+           // $(selection.anchorNode).parentsUntil('#storycontent').toggleClass('right_align');
+           // $(selection.focusNode).parentsUntil('#storycontent').toggleClass('right_align');
+
+           var focusN = document.getSelection().focusNode;
+           var anchorN = document.getSelection().anchorNode;
+            
+            console.log($(focusN).parent())
+                $(focusN).parent().toggleClass('right_align');
+                var nextN = $(focusN).next();
+                        console.log(nextN)
+                nextN.parentsUntil('#storycontent').toggleClass('right_align');
+                
+                
+                    
+        }
+        });
+
+          /*      while ($(nextNode) != $(selection.focusNode)) {
+                    nextNode.toggleClass('right_align');
+                    nextNode = $(nextNode).next();
+            }*/
+
+/*           var allChild = document.getElementById('storycontent').childNodes;
+            for (i in allChild ){
+                console.log(allChild[i]);
+                var node = allChild[i];
+                oNode = {node};
+                if (selection.containsNode(oNode, oNode))
+                {
+                    $(allChild[i]).addClass('right_align');
+                }
+            }*/
+            
+         /*   var selection = window.getSelection();
+            var range = selection.getRangeAt(0); //the first range of the selection
+
+            console.log(range);
+            var startNode = range.startContainer;
+            var endNode = range.endContainer;
+
+
+            var getNextNode = function(node, skipChildren, endNode){
+                //if there are child nodes and we didn't come from a child node
+                if (endNode == node) {
+                    return null;
+                }
+                if (node.firstChild && !skipChildren) {
+                    return node.firstChild;
+                }
+                if (!node.parentNode){
+                    return null;
+                }
+                return node.nextSibling 
+                        || getNextNode(node.parentNode, true, endNode); 
+                };
+                var range = selection.getRangeAt(0);
+
+           var getNodesInRange = function(range){
+                var startNode = range.startContainer.childNodes[range.startOffset]
+                        || range.startContainer;//it's a text node
+                var endNode = range.endContainer.childNodes[range.endOffset]
+                        || range.endContainer;
+
+                if (startNode == endNode && startNode.childNodes.length === 0) {
+                    return [startNode];
+                };
+
+                var nodes = [];
+                do {
+                    nodes.push(startNode);
+                }
+                while (startNode = getNextNode(startNode, endNode));
+
+                return nodes;
+            };
+
+            var selNodes = getNodesInRange();
+            console.log(getNodesInRange(window.getSelection().getRangeAt(0)));*/
+
+/*            console.log( window.getSelection.childNodes);
+
+            var allNodes = $('#storycontent').children().get(0);
+
+            
+            for (i in  allNodes)
+            var selNode = allNodes[i];
+            {
+            if (selection.containsNode(selNode, selNode)){
+                $(selNode).toggleClass('right_align');
+            }
+            }*/
+         /*   if (nextAnchorNode.siblings) {
+                nextAnchorNode.siblings().toggleClass('right_align');
+            }*/
+          //  $(selection.anchorNode).parentsUntil(nextAnchorNode).toggleClass('right_align');
+         //   $(selection.getRangeAt(0).commonAncestorContainer).toggleClass('right_align');
+          //  $(selection.focusNode).parentsUntil(nextFocusNode).toggleClass('right_align');
+
+
+           /*    
+      
+        }
+            });
+
+            $('#li6').spectrum({
+                showPalette: true,
+                palette: ['black', 'white', 'red', 'green', 'blue', 'yellow'],
+                localStorageKey: "spectrum.homepage",
+                hideAfterPaletteSelect:true,
+                showButtons: false
+            }).on('hide.spectrum', function(e, tinycolor) { 
+                if (selection){
+                    var chosenColor = $('#li6').spectrum('get').toHexString()
+                    
+
+                    $(selection).css('color', '"'+chosenColor+'"');
+                    
+                }
+                else { return;}                
+            });
+
+ /*           var selectedNodess = document.createTreeWalker(
+                document.body,
+                NodeFilter.SHOW_ALL, 
+            );
+
+            console.log(selectedNodess)*/
+
+
+          $('#li5').on('click', function(){
+
+            
+
+     /*       $(selection)
+                .contents()
+                .filter(function() {
+                    console.log(this.nodeType === 3) //Node.TEXT_NODE
+                });*/
+            })   
+
+
+            /* gefladerter code um selektion mit html tags zu bekommen; */
+
+/* $('#storycontent').on('keyup mouseup', function getSelectionHtml() {
+    var html = '';
+    if (typeof window.getSelection != 'undefined') {
+        var sel = window.getSelection();
+        if (sel.rangeCount) {
+            var container = document.createElement('div');
+            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
+                container.appendChild(sel.getRangeAt(i).cloneContents());
+            }
+            html = container.innerHTML;
+        }
+    } else if (typeof document.selection != 'undefined') {
+        if (document.selection.type == 'Text') {
+            html = document.selection.createRange().htmlText;
+        }
+    }
+    console.log(html);
+    return html;
+     
+ });*/
+
+
+        
+
+                 
+
+              
+        })  // DOM ready end
+
+	</script>
+	<style>
+<<<<<<< HEAD
+=======
+
+
+
+html, body {
+    margin: 0;
+}
+
+
+        #menu ul li {
+
+      /*      border: 1px solid white;*/
+            list-style: none;
+    /*        top: 40%;
+            margin-top: 2%;*/
+            padding: 1%;
+            position: relative;
+          /*  
+            margin-left: 10%;
+            margin-top: 2em;*/
+            margin: 1% 3%;
+            color: white;
+   /*         top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);*/
+
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        #menu ul li:hover {
+            background: grey;
+        }
+
+        #menu ul {
+            padding: 0.5%;
+        }
+        
+        nav { 
+            margin-top: 2%;
+             height: 7%;
+            background: grey;
+        }
+
+        #storycontent {
+
+            border: 1px solid black;
+            background: lightblue;
+            width: 70%;
+            height: 20em;
+        }
+
+>>>>>>> e3896f42de68e8fd4cd7a747d19ea8c51627df87
+	</style>
+
+</head>
+<body>
+
+<nav id="menu"></nav>
+<ul id="cloned_items"></ul>
+
+
+<div id="storycontent" contenteditable="true">
+
+<!--
+    <h1>HTML Ipsum Presents</h1>
+
+<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+<h2>Header Level 2</h2>
+
+<ol>
+   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+   <li>Aliquam tincidunt mauris eu risus.</li>
+</ol>
+
+<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+
+<h3>Header Level 3</h3>
+
+<ul>
+   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+   <li>Aliquam tincidunt mauris eu risus.</li>
+</ul>
+
+<pre><code>
+#header h1 a {
+  display: block;
+  width: 300px;
+  height: 80px;
+}
+</code></pre>-->
+</div>
+</body>
+</html>
